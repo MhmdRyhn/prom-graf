@@ -6,10 +6,10 @@ scrape_configs:
   - job_name: prometheus
     static_configs:
       - targets:
-        - localhost:9090"
-  # - job_name: go-sample
-  #   metrics_path: /metrics # default is /metrics
-  #   metrics_interval: 15s
-  #   static_configs:
-  #     - target:
-  #       - "http://127.0.0.1:9091"
+        - localhost:9090
+  - job_name: go-sample
+    metrics_path: /metrics # default is /metrics
+    metrics_interval: 15s
+    static_configs:
+      - targets:
+        - localhost:2020

@@ -1,4 +1,4 @@
-module prom-graf
+module github.com/mhmdryhn/prom-graf
 
 go 1.18
 

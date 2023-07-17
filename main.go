@@ -69,7 +69,9 @@ func PromPullHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := chi.NewRouter()
 	r.Get("/greetings", PromPullHandler)
-	err := http.ListenAndServe(":2021", r)
+	port := 2020
+	logrus.Infof("Serving app on port: %d", port)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", port), r)
 	if err != nil {
 		logrus.Errorf("Error while http.ListenAndServe: %s", err.Error())
 	}

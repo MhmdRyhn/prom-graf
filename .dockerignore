@@ -1,0 +1,6 @@
+.vscode/
+prom_config/
+.gitignore
+docker-compose.yaml
+LICENSE
+README.md
