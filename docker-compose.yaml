@@ -7,7 +7,7 @@ services:
     ports:
       - "9091:9090"
     volumes:
-      - "./prom_config/prometheus.yaml:/etc/prometheus/prometheus.yaml"
+      - "./prometheus_config/prometheus.yaml:/etc/prometheus/prometheus.yaml"
       - "~/.docker-volumes/prometheus:/prometheus"
 
   grafana_ui:

@@ -12,4 +12,4 @@ scrape_configs:
     metrics_interval: 15s
     static_configs:
       - targets:
-        - localhost:2020
+        - golang_app:2020
