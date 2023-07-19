@@ -2,14 +2,18 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+
+alerting:
+
+rule_files:
+
 scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets:
-        - localhost:9090
-  - job_name: go-sample
+  # - job_name: prometheus
+  #   static_configs:
+  #     - targets:
+  #       - localhost:9090
+  - job_name: golang_app
     metrics_path: /metrics # default is /metrics
-    metrics_interval: 15s
     static_configs:
       - targets:
         - golang_app:2020

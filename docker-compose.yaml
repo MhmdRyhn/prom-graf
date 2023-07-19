@@ -1,14 +1,21 @@
-version: '3'
+version: "3"
 
 services:
   prometheus_server:
     image: prom/prometheus:v2.45.0
     container_name: prometheus_server
+    restart: always
     ports:
       - "9091:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
     volumes:
-      - "./prometheus_config/prometheus.yaml:/etc/prometheus/prometheus.yaml"
-      - "~/.docker-volumes/prometheus:/prometheus"
+      - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - prometheus_data:/prometheus
+      # - "~/.docker-volumes/prometheus:/prometheus"
 
   grafana_ui:
     image: grafana/grafana:9.5.6
@@ -16,7 +23,9 @@ services:
     ports:
       - "3001:3000"
     volumes:
-      - "~/.docker-volumes/grafana:/var/lib/grafana"
+      # - ./grafana/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - grafana-storage:/var/lib/grafana
+      # - "~/.docker-volumes/grafana:/var/lib/grafana"
 
   golang_app:
     build:
@@ -24,5 +33,10 @@ services:
       dockerfile: Dockerfile
     image: prom-graf:latest
     container_name: prom_graf_app
+    restart: always
     ports:
       - "2021:2020"
+
+volumes:
+  prometheus_data:
+  grafana-storage:
